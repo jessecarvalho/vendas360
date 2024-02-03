@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SaleController;
+use App\Http\Controllers\SellerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,13 +24,23 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/vendedores', function () {
-    return view('sellers');
-})->middleware(['auth', 'verified'])->name('vendedores');
+Route::middleware(['auth', 'verified'])->prefix('vendedores')->group(function () {
+    Route::get('/', [SellerController::class, 'index'])->name('sellers.index');
+    Route::get('/criar', [SellerController::class, 'create'])->name('sellers.create');
+    Route::post('/criar', [SellerController::class, 'store'])->name('sellers.store');
+    Route::get('/editar/{seller}', [SellerController::class, 'edit'])->name('sellers.edit');
+    Route::put('editar/{seller}', [SellerController::class, 'update'])->name('sellers.update');
+    Route::delete('/{seller}', [SellerController::class, 'destroy'])->name('sellers.destroy');
+});
 
-Route::get('/vendas', function () {
-    return view('sales');
-})->middleware(['auth', 'verified'])->name('vendas');
+Route::middleware(['auth', 'verified'])->prefix('vendas')->group(function () {
+    Route::get('/', [SaleController::class, 'index'])->name('sales.index');
+    Route::get('/criar', [SaleController::class, 'create'])->name('sales.create');
+    Route::post('/criar', [SaleController::class, 'store'])->name('sales.store');
+    Route::get('/editar/{sale}', [SaleController::class, 'edit'])->name('sales.edit');
+    Route::put('/editar/{sale}', [SaleController::class, 'update'])->name('sales.update');
+    Route::delete('/{sale}', [SaleController::class, 'destroy'])->name('sales.destroy');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
