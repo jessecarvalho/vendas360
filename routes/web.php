@@ -36,6 +36,7 @@ Route::middleware(['auth', 'verified'])->prefix('vendedores')->group(function ()
     Route::get('/editar/{seller}', [SellerController::class, 'edit'])->name('sellers.edit');
     Route::put('editar/{seller}', [SellerController::class, 'update'])->name('sellers.update');
     Route::delete('/{seller}', [SellerController::class, 'destroy'])->name('sellers.destroy');
+    Route::get('/{seller}', [SellerController::class, 'sales'])->name('sellers.sales');
 });
 
 Route::middleware(['auth', 'verified'])->prefix('vendas')->group(function () {
