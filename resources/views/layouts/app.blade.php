@@ -33,4 +33,10 @@
             </main>
         </div>
     </body>
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-masker@1.2.0/lib/vanilla-masker.min.js"></script>
+    <script>
+        window.onload = function() {
+            VMasker(document.querySelector("#date")).maskPattern("99/99/9999");
+        };
+    </script>
 </html>
