@@ -38,6 +38,13 @@
                             </tr>
                         </thead>
                         <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                            @if (count($sellers) === 0)
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap" colspan="4">
+                                        <div class="text-sm text-gray-900 dark:text-gray-100">{{ __('Nenhum vendedor cadastrado') }}</div>
+                                    </td>
+                                </tr>
+                            @endif
                             @foreach ($sellers as $seller)
                                 <tr>
                                     <td class="px-6 py-4 whitespace-nowrap">
@@ -54,6 +61,7 @@
                                         <div class="text-sm text-gray-900 dark:text-gray-100">{{ $seller->email }}</div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
+                                        <a href="{{ route('sellers.sales', $seller->id) }}" class="text-indigo-900 hover:text-indigo-900 mr-3">{{ __('Ver vendas') }}</a>
                                         <a href="{{ route('sellers.edit', $seller->id) }}" class="text-indigo-600 hover:text-indigo-900 mr-3">{{ __('Editar') }}</a>
                                         <form method="post" action="{{ route('sellers.destroy', $seller->id) }}" class="inline">
                                             @csrf

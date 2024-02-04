@@ -41,6 +41,13 @@
                         </tr>
                         </thead>
                         <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                        @if (count($sales) === 0)
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap" colspan="4">
+                                    <div class="text-sm text-gray-900 dark:text-gray-100">{{ __('Nenhuma venda cadastrada') }}</div>
+                                </td>
+                            </tr>
+                        @endif
                         @foreach ($sales as $sale)
                             <tr>
                                 <td class="px-6 py-4 whitespace-nowrap">
