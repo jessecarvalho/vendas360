@@ -9,8 +9,8 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <h2 class="text-xl font-semibold">Editar um novo vendedor</h2>
-                    <h3>Use o formulário abaixo para editar os dados do vendendor {{ $seller["name"]  }}</h3>
+                    <h2 class="text-xl font-semibold">Editar dados do vendedor </h2>
+                    <h3>Use o formulário abaixo para editar os dados do vendedor <b> {{ $seller["name"]  }} </b></h3>
                     <form method="post" action="{{ route('sellers.edit', $seller["id"]) }} " class="mt-6 space-y-6">
                         @csrf
                         @method('put')
