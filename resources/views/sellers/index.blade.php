@@ -7,13 +7,14 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <a href="{{ route('sellers.create') }}">
+            <a href="{{ route('sellers.create') }}">
+                <div class="bg-blue-500 hover:bg-blue-600 text-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 dark:text-gray-100 flex items-center gap-4">
+                        <img class="invert" src="{{@asset("/icons/plus-solid.svg")}}" alt="Ĩcone de plus (mais)" width="25px">
                         {{ __('Criar novo vendedor') }}
-                    </a>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
     </div>
 
@@ -21,7 +22,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <h2 class="text-xl font-semibold">Vendedores cadastrados</h2>
+                    <h2 class="text-xl font-semibold"> Vendedores cadastrados</h2>
                     <table class="w-full mt-6">
                         <thead>
                             <tr>
@@ -42,7 +43,7 @@
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items
                                         -center">
-                                            <div class="ml-4">
+                                            <div>
                                                 <div class="text-sm font-medium text-gray-900 dark:text-gray-100">
                                                     {{ $seller->name }}
                                                 </div>
@@ -52,8 +53,8 @@
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="text-sm text-gray-900 dark:text-gray-100">{{ $seller->email }}</div>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <a href="{{ route('sellers.edit', $seller->id) }}" class="text-indigo-600 hover:text-indigo-900">{{ __('Editar') }}</a>
+                                    <td class="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
+                                        <a href="{{ route('sellers.edit', $seller->id) }}" class="text-indigo-600 hover:text-indigo-900 mr-3">{{ __('Editar') }}</a>
                                         <form method="post" action="{{ route('sellers.destroy', $seller->id) }}" class="inline">
                                             @csrf
                                             @method('delete')
