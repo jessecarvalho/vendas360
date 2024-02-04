@@ -29,10 +29,10 @@
                         @auth
                             <a href="{{ url('/dashboard') }}" class="border border-blue-500 text-white py-3 rounded w-full text-center font-semibold dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm hover:bg-white hover:text-black">Dashboard</a>
                         @else
-                            <a href="{{ route('login') }}" class="border border-blue-500 text-white py-3 rounded w-1/2 text-center font-semibold dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm hover:bg-white hover:text-black">Log in</a>
+                            <a href="{{ route('login') }}" class="border border-blue-500 text-white py-3 rounded w-1/2 text-center font-semibold dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm hover:bg-white hover:text-black">Entrar</a>
 
                             @if (Route::has('register'))
-                                <a href="{{ route('register') }}" class="w-1/2 text-center py-3 text-white rounded border border-blue-500 ml-4 font-semibold dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm hover:bg-white hover:text-black">Register</a>
+                                <a href="{{ route('register') }}" class="w-1/2 text-center py-3 text-white rounded border border-blue-500 ml-4 font-semibold dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm hover:bg-white hover:text-black">Registrar</a>
                             @endif
                         @endauth
                     </div>
