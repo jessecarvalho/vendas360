@@ -24,8 +24,8 @@
 
                         <div>
                             <x-input-label for="date" :value="__('Data da venda')" />
-                            <x-text-input id="date" name="date" type="date" class="mt-1 block
-                            w-full" :value="old('date', $sale['date'])" required autocomplete="date"
+                            <x-text-input id="date" name="date" type="text" class="mt-1 block
+                            w-full" :value="old('date', date('d/m/Y', strtotime($sale['date'])))" required autocomplete="date"
                                           placeholder="Digite aqui a data da venda" />
                             <x-input-error class="mt-2" :messages="$errors->get('date')" />
                         </div>
