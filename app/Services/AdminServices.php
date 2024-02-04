@@ -5,29 +5,38 @@ namespace App\Services;
 use App\Models\Seller;
 use Illuminate\Support\Facades\Mail;
 
-class AdminServices
+class AdminServicescalculateTotalSales
 {
     public function generateReportForAllSellers(): void
     {
         $sellers = Seller::all();
         foreach ($sellers as $seller) {
-            $this->generateReport($seller);
+            $sales = $seller->sales()->whereDate('date', now())->get();
+            $totalSales = $this->calculateTotalSales($sales);
+            $totalValue = $this->calculateTotalValue($sales);
+            $totalCommission = $this->calculateTotalCommission($sales);
+
+            $body = "Olá, " . $seller->name . ". Segue seu relatório de vendas do dia: \n";
+            $body .= "Quantidade de vendas: " . $totalSales . "\n";
+            $body .= "Valor total das vendas: " . $totalValue . "\n";
+            $body .= "Valor total das comissões: " . $totalCommission . "\n";
+
+            $this->sendReportByEmail($seller->email, $seller->name, "Relatório de vendas do dia", $body);
         }
     }
-
     public function generateReportEmailForAdmin($user) : void
     {
-
         $sellers = Seller::all();
-        $body = "Relatório de vendas: \n";
+        $totalSalesValue = 0;
         foreach ($sellers as $seller) {
-            $body .= "Vendedor: " . $seller->name . "\n";
             $sales = $seller->sales()->whereDate('date', now())->get();
-            foreach ($sales as $sale) {
-                $body .= "Valor: " . $sale->value . " - Data: " . $sale->date . "\n";
-            }
+            $totalSalesValue += $this->calculateTotalValue($sales);
         }
-        $this->sendReportByEmail($user->email, $user->name, "Relatório de vendas", $body);
+
+        $body = "Olá, " . $user->name . ". Segue o relatório de vendas do dia: \n";
+        $body .= "Valor total das vendas: " . $totalSalesValue . "\n";
+
+        $this->sendReportByEmail($user->email, $user->name, "Relatório de vendas do dia", $body);
     }
 
     public function generateReport(mixed $seller): void
@@ -51,9 +60,19 @@ class AdminServices
         });
     }
 
-    private function generateCommissionForSeller($saleValue): float
+    private function calculateTotalCommission($sales): float
     {
-        return $saleValue * 0.085;
+        return $sales->sum('value') * 0.085;
+    }
+
+    private function calculateTotalValue($sales): float
+    {
+        return $sales->sum('value');
+    }
+
+    private function calculateTotalSales($sales): int
+    {
+        return $sales->count();
     }
 
 }
