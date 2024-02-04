@@ -93,4 +93,11 @@ class SellerController extends Controller
 
         return redirect()->back()->with('status', 'error')->with('message', 'Erro ao excluir vendedor!');
     }
+
+    public function sales(int $id) : View
+    {
+        $seller = Seller::find($id);
+        $sales = $seller->sales;
+        return view('sellers.sales', compact('sales', 'seller'));
+    }
 }
