@@ -9,11 +9,15 @@ RUN apt-get update && \
         libpng-dev \
         libjpeg-dev \
         libfreetype6-dev \
-        mysql-client && \
+        default-mysql-client && \
     docker-php-ext-configure gd --with-freetype --with-jpeg && \
     docker-php-ext-install gd pdo pdo_mysql && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Install Node.js and npm
+RUN curl -sL https://deb.nodesource.com/setup_21.x | bash - && \
+    apt-get install -y nodejs
 
 # Instalação do Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -31,6 +35,12 @@ COPY . .
 
 # Instalação das dependências PHP
 RUN composer install --no-interaction
+
+# Instalação das dependências do frontend
+RUN npm install
+
+# Compilação dos assets
+RUN npm run build
 
 # Geração da chave de aplicação Laravel
 RUN php artisan key:generate

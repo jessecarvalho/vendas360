@@ -9,15 +9,12 @@ ___
 
 1. Clone este repositório com o comando git clone git@github.com:jessecarvalho/tray.git
 2. Acesse a pasta do projeto com o comando `cd tray`.
-3. Instale as dependências do projeto com o comando `composer install`.
-4. Crie um arquivo `.env` na raiz do projeto e copie o conteúdo do arquivo `.env.example` para ele.
-5. Configure o arquivo `.env` com as informações do seu banco de dados.
-6. Configure o arquivo `.env` com as informações de um provedor de e-mail smtp de sua preferência, está configurado para enviar e-mails com o Mailtrap.
-7. Execute o comando npm install para instalar as dependências do frontend.
-8. Execute npm run build para compilar os assets.
-9. Execute o docker com o comando `docker-compose up -d`.
-10. Caso seja necessário, execute os seeds para popular o banco de dados com dados iniciais com o comando `docker-compose exec app php artisan db:seed`.
-11. Acesse a aplicação em `http://localhost:8000`.
+3. Crie um arquivo `.env` na raiz do projeto e copie o conteúdo do arquivo `.env.example` para ele.
+4. Configure o arquivo `.env` com as informações do seu banco de dados.
+5. Configure o arquivo `.env` com as informações de um provedor de e-mail smtp de sua preferência, está configurado para enviar e-mails com o Mailtrap.
+6. Execute o docker com o comando `docker-compose up --build -d`.
+7. Caso haja interesse em popular o banco de dados execute os seeds com o comando `docker-compose exec app php artisan db:seed`. 
+8. Acesse a aplicação em `http://localhost:8000`.
 
 ___
 
