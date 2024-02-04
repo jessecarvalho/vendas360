@@ -55,7 +55,7 @@
                                         -center">
                                         <div>
                                             <div class="text-sm font-medium text-gray-900 dark:text-gray-100">
-                                                {{ $sale->date }}
+                                                {{ date("d/m/Y", strtotime($sale->date)) }}
                                             </div>
                                         </div>
                                     </div>
