@@ -17,7 +17,7 @@
 
                         <div>
                             <x-input-label for="value" :value="__('Valor da venda')" />
-                            <x-text-input id="value" name="value" type="text" class="mt-1 block w-full" :value="old('value', $sale['value'])" required autofocus autocomplete="value"
+                            <x-text-input id="value" name="value" type="text" class="mt-1 block w-full" required autofocus autocomplete="value"
                                           placeholder="Digite aqui o valor do venda" />
                             <x-input-error class="mt-2" :messages="$errors->get('value')" />
                         </div>
@@ -25,7 +25,7 @@
                         <div>
                             <x-input-label for="date" :value="__('Data da venda')" />
                             <x-text-input id="date" name="date" type="date" class="mt-1 block
-                            w-full" :value="old('date', $sale['date'])" required autocomplete="date"
+                            w-full" required autocomplete="date"
                             placeholder="Digite aqui a data da venda" />
                             <x-input-error class="mt-2" :messages="$errors->get('date')" />
                         </div>

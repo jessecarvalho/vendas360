@@ -17,14 +17,14 @@
 
                         <div>
                             <x-input-label for="name" :value="__('Nome do vendedor')" />
-                            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $seller['name'])" required autofocus autocomplete="name"
+                            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" required autofocus autocomplete="name"
                             placeholder="Digite aqui o nome do vendedor" />
                             <x-input-error class="mt-2" :messages="$errors->get('name')" />
                         </div>
 
                         <div>
                             <x-input-label for="email" :value="__('Email do vendedor')" />
-                            <x-text-input id="email" name="email" type="text" class="mt-1 block w-full" :value="old('email', $seller['email'])" required autofocus autocomplete="email" placeholder="Digite aqui o email do vendedor" />
+                            <x-text-input id="email" name="email" type="text" class="mt-1 block w-full" required autofocus autocomplete="email" placeholder="Digite aqui o email do vendedor" />
                             <x-input-error class="mt-2" :messages="$errors->get('email')" />
                         </div>
 
