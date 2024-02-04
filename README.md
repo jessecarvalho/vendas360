@@ -3,7 +3,6 @@
 # Tray - Desafio Técnico - Plataforma vendedor
 
 Este é um sistema web desenvolvido para realizar o cadastro de vendedores e vendas, bem como calcular a comissão sobre as vendas realizadas.
-___
 
 ## Como executar o projeto
 
@@ -16,7 +15,6 @@ ___
 7. Caso haja interesse em popular o banco de dados execute os seeds com o comando `docker-compose exec app php artisan db:seed`. 
 8. Acesse a aplicação em `http://localhost:8000`.
 
-___
 
 ## Escolhas Técnicas
 
@@ -35,7 +33,6 @@ Para o banco de dados optei por utilizar MySQL, por ser um banco de dados relaci
 <img height="50" src="https://miro.medium.com/v2/resize:fit:512/1*JEHLmWo6_SrpHPiP4AimIw.png"/>
 
 Também optei por utilizar o tailwind css, por ser um framework css que facilita a criação de interfaces e é uma boa escolha para projetos pequenos e com prazo curto.
-___
 
 ## Requisitos do Desafio
 
@@ -53,7 +50,6 @@ ___
 - [x] O projeto precisa ser mysql ou postgresql. (MySQL)
 - [x] O projeto precisa ser dockerizado. (Docker)
 
----
 
 ## Requisitos Extras
 
