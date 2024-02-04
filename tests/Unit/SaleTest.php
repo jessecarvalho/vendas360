@@ -32,7 +32,7 @@ class SaleTest extends TestCase
         $data = [
             "seller_id" => $this->seller->id,
             "value" => 100,
-            "date" => "2024-01-01",
+            "date" => "01/01/2024",
         ];
         $inserted = $saleServices->insert($data);
         $this->assertTrue($inserted);
@@ -44,7 +44,7 @@ class SaleTest extends TestCase
         $data = [
             "seller_id" => $this->seller->id,
             "value" => 100,
-            "date" => "2024-01-01",
+            "date" => "01/01/2024",
         ];
         $inserted = $saleServices->insert($data);
         $this->assertTrue($inserted);
@@ -52,7 +52,7 @@ class SaleTest extends TestCase
         $data = [
             "seller_id" => $this->seller->id,
             "value" => 200,
-            "date" => "2024-01-01",
+            "date" => "01/01/2024",
         ];
         $updated = $saleServices->update($data, $sale->id);
         $this->assertTrue($updated);
@@ -64,7 +64,7 @@ class SaleTest extends TestCase
         $data = [
             "seller_id" => $this->seller->id,
             "value" => 100,
-            "date" => "2024-01-01",
+            "date" => "01/01/2024",
         ];
         $inserted = $saleServices->insert($data);
         $this->assertTrue($inserted);
