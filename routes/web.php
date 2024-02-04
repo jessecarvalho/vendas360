@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\SellerController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,9 +21,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+
+
+Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function () {
+    Route::get('/', [AdminController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+    Route::post('/encerrar-dia', [AdminController::class, 'finishDay'])->name('finish-day');
+    Route::post('/enviar-relatorio-para-vendedor', [AdminController::class, 'generateReportForUniqueSeller'])->name('send-report-to-seller');
+});
 
 Route::middleware(['auth', 'verified'])->prefix('vendedores')->group(function () {
     Route::get('/', [SellerController::class, 'index'])->name('sellers.index');
