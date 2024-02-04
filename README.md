@@ -62,17 +62,22 @@ Também optei por utilizar o tailwind css, por ser um framework css que facilita
 
 <img width="100%" src="https://github.com/jessecarvalho/tray/blob/main/public/screenshots/2024-02-04%2019.29.31%200.0.0.0%209cd1510a26e2.png"/>
 
+---
 
 <img width="100%" src="https://github.com/jessecarvalho/tray/blob/main/public/screenshots/2024-02-04%2019.29.42%200.0.0.0%20a018fbd78ef4.png"/>
 
+---
 
 <img width="100%" src="https://github.com/jessecarvalho/tray/blob/main/public/screenshots/2024-02-04%2019.29.58%200.0.0.0%20f38e9e45222e.png"/>
 
+---
 
 <img width="100%" src="https://github.com/jessecarvalho/tray/blob/main/public/screenshots/2024-02-04%2019.30.12%200.0.0.0%20d87345f9eee3.png"/>
 
+---
 
 <img width="100%" src="https://github.com/jessecarvalho/tray/blob/main/public/screenshots/2024-02-04%2019.30.22%200.0.0.0%20d6cb9cbd78bc.png"/>
 
+---
 
 <img width="100%" src="https://github.com/jessecarvalho/tray/blob/main/public/screenshots/2024-02-04%2019.30.40%200.0.0.0%207e811b0fd310.png"/>
