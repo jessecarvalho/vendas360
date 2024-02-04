@@ -15,6 +15,10 @@ Este é um sistema web desenvolvido para realizar o cadastro de vendedores e ven
 7. Caso haja interesse em popular o banco de dados execute os seeds com o comando `docker-compose exec app php artisan db:seed`. 
 8. Acesse a aplicação em `http://localhost:8000`.
 
+## Como executar os testes
+1. Configure o arquivo `.env.testing` com as informações do seu banco de dados de teste.
+2. Com o docker em execução, execute o comando `docker-compose run app php artisan migrate --env=testing`, para criar o banco de dados de teste.
+3. Execute o comando `docker-compose run app php artisan test` para executar os testes.
 
 ## Escolhas Técnicas
 
