@@ -4,38 +4,51 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Seller;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
+use App\Services\SellerServices;
 
 class SellerController extends Controller
 {
-    public function index()
+    private SellerServices $sellerServices;
+
+    public function __construct(SellerServices $sellerServices)
+    {
+        $this->sellerServices = $sellerServices;
+    }
+    public function index() : View
     {
         $sellers = Seller::all();
         return view('sellers.index', compact('sellers'));
     }
 
-    public function create()
+    public function create() : View
     {
         return view('sellers.create');
     }
 
-    public function store(Request $request)
+    public function store(Request $request) : RedirectResponse
     {
         $request->validate([
             'name' => 'required|string',
             'email' => 'required|email|unique:sellers,email',
         ]);
 
-        $seller = Seller::create($request->all());
+        $data = array(
+            "name" => $request->input('name'),
+            "email" => $request->input('email')
+        );
 
-        if ($seller) {
+        $inserted = $this->sellerServices->insert($data);
+
+        if ($inserted) {
             return redirect()->back()->with('status', 'success')->with('message', 'Vendedor criado com sucesso!');
         }
 
         return redirect()->back()->with('status', 'error')->with('message', 'Erro ao criar vendedor!');
-
     }
 
-    public function edit(int $id)
+    public function edit(int $id) : View | RedirectResponse
     {
         $seller = Seller::find($id);
 
@@ -46,20 +59,20 @@ class SellerController extends Controller
         return view('sellers.edit', compact('seller'));
     }
 
-    public function update(int $id, Request $request)
+    public function update(int $id, Request $request) : RedirectResponse
     {
-        $seller = Seller::find($id);
-
-        if (!$seller) {
-            return redirect()->back()->with('status', 'error')->with('message', 'Vendedor não encontrado!');
-        }
 
         $request->validate([
             'name' => 'required|string',
-            'email' => 'required|email|unique:sellers,email,' . $seller->id,
+            'email' => 'required|email|unique:sellers,email,' . $id,
         ]);
 
-        $updated = $seller->update($request->all());
+        $data = array(
+            "name" => $request->input('name'),
+            "email" => $request->input('email')
+        );
+
+        $updated = $this->sellerServices->update($data, $id);
 
         if ($updated) {
             return redirect()->back()->with('status', 'success')->with('message', 'Vendedor atualizado com sucesso!');
@@ -69,15 +82,10 @@ class SellerController extends Controller
 
     }
 
-    public function destroy(int $id)
+    public function destroy(int $id) : RedirectResponse
     {
-        $seller = Seller::find($id);
 
-        if (!$seller) {
-            return redirect()->back()->with('status', 'error')->with('message', 'Vendedor não encontrado!');
-        }
-
-        $deleted = $seller->delete();
+        $deleted = $this->sellerServices->delete($id);
 
         if ($deleted) {
             return redirect()->back()->with('status', 'success')->with('message', 'Vendedor excluído com sucesso!');
