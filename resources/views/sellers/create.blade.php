@@ -32,21 +32,13 @@
                             <x-primary-button>{{ __('Salvar') }}</x-primary-button>
 
                             @if (session('status') === 'success')
-                                <p
-                                    x-data="{ show: true }"
-                                    x-show="show"
-                                    x-transition
-                                    x-init="setTimeout(() => show = false, 2000)"
-                                    class="text-sm text-green-600 dark:text-gray-400"
-                                >{{ __(session('message')) }}</p>
+                                <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)" class="text-sm text-green-600 dark:text-gray-400">
+                                    {{ __(session('message')) }}
+                                </p>
                             @elseif(session('status') === 'error')
-                                <p
-                                    x-data="{ show: true }"
-                                    x-show="show"
-                                    x-transition
-                                    x-init="setTimeout(() => show = false, 2000)"
-                                    class="text-sm text-red-600 dark:text-red-400"
-                                >{{ __(session('message')) }}</p>
+                                <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)" class="text-sm text-red-600 dark:text-red-400" >
+                                    {{ __(session('message')) }}
+                                </p>
                             @endif
                         </div>
                     </form>

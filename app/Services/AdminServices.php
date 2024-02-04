@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Models\Admin;
 use App\Models\Seller;
 use Illuminate\Support\Facades\Mail;
 
