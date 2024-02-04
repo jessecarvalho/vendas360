@@ -1,66 +1,69 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<img height="150" src="https://github.com/jessecarvalho/tray/blob/main/public/logo.png"/>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# Tray - Desafio Técnico - Plataforma vendedor
 
-## About Laravel
+Este é um sistema web desenvolvido para realizar o cadastro de vendedores e vendas, bem como calcular a comissão sobre as vendas realizadas.
+___
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Como executar o projeto
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+1. Clone este repositório com o comando git clone git@github.com:jessecarvalho/tray.git
+2. Acesse a pasta do projeto com o comando `cd tray`.
+3. Instale as dependências do projeto com o comando `composer install`.
+4. Crie um arquivo `.env` na raiz do projeto e copie o conteúdo do arquivo `.env.example` para ele.
+5. Configure o arquivo `.env` com as informações do seu banco de dados.
+6. Configure o arquivo `.env` com as informações de um provedor de e-mail smtp de sua preferência, está configurado para enviar e-mails com o Mailtrap.
+7. Execute o comando npm install para instalar as dependências do frontend.
+8. Execute npm run build para compilar os assets.
+9. Execute o docker com o comando `docker-compose up -d`.
+10. Caso seja necessário, execute os seeds para popular o banco de dados com dados iniciais com o comando `docker-compose exec app php artisan db:seed`.
+11. Acesse a aplicação em `http://localhost:8000`.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+___
 
-## Learning Laravel
+## Escolhas Técnicas
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+<img height="25" src="https://laravel.com/img/logotype.min.svg"/>
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Para o Backend optei por utilizar PHP com o framework Laravel, por ser um framework robusto com rápido setup e que fazia sentido para a vaga.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+<img height="25" src="https://blade-ui-kit.com/images/logo.svg"/>
 
-## Laravel Sponsors
+Para o frontend, optei por utilizar blade-ui-kit, por ser um framework de componentes para Laravel que facilita a criação de interfaces e obedecia aos requisitos do desafio.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+<img height="50" src="https://www.mysql.com/common/logos/logo-mysql-170x115.png"/>
 
-### Premium Partners
+Para o banco de dados optei por utilizar MySQL, por ser um banco de dados relacional que tenho bastante contato e que também atende aos requisitos do desafio.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+<img height="50" src="https://miro.medium.com/v2/resize:fit:512/1*JEHLmWo6_SrpHPiP4AimIw.png"/>
 
-## Contributing
+Também optei por utilizar o tailwind css, por ser um framework css que facilita a criação de interfaces e é uma boa escolha para projetos pequenos e com prazo curto.
+___
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Requisitos do Desafio
 
-## Code of Conduct
+- [x] A API deve ser capaz de Cadastrar vendedores informando nome e e-mail;
+- [x] A API deve ser capaz de Cadastrar vendas informando o vendedor, o valor e a data da venda;
+- [x] A API deve ser capaz de Listar todos os vendedores;
+- [x] A API deve ser capaz de Listar todas as vendas;
+- [x] A API deve ser capaz de Listar todas as vendas de um vendedor específico;
+- [x] A Aplicação deve ser capaz de interagir com todos os endpoints da API;
+- [x] A Aplicação deve ser capaz de Enviar um e-mail para cada vendedor com a quantidade de vendas realizadas no dia, o valor total das vendas e o valor total das comissões;
+- [x] A Aplicação deve ser capaz de Enviar um e-mail para o administrador com a soma de todas as vendas efetuadas no dia;
+- [x] A Aplicação deve ser capaz de Reenviar o e-mail de comissão para um determinado vendedor.
+- [x] O projeto deverá ser desenvolvido com PHP, Vue.js ou JavaScript puro.  (PHP)
+- [x] O projeto precisa obrigatoriamente ser escrita usando um dos frameworks PHP listados;. (Laravel)
+- [x] O projeto precisa ser mysql ou postgresql. (MySQL)
+- [x] O projeto precisa ser dockerizado. (Docker)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+---
 
-## Security Vulnerabilities
+## Requisitos Extras
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- [x] Implementar autenticação na API.
+- [x] Implementar testes automatizados.
+- [x] Implementar remoção e edição do vendedor
+- [x] Implementar validação dos dados enviados
 
-## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
