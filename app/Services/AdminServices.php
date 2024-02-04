@@ -27,8 +27,7 @@ class AdminServices
                 $body .= "Valor: " . $sale->value . " - Data: " . $sale->date . "\n";
             }
         }
-
-        $this->sendEmail($user, $body);
+        $this->sendReportByEmail($user->email, $user->name, "Relatório de vendas", $body);
     }
 
     public function generateReport(mixed $seller): void
@@ -36,10 +35,10 @@ class AdminServices
         $email = $seller->email;
         $name = $seller->name;
         $subject = "Relatório de vendas";
-        $body = "Olá, " . $name . ". Segue seu relatório de vendas: ";
+        $body = "Olá, " . $name . ". Segue seu relatório de vendas: " . "\n";
         $sales = $seller->sales()->whereDate('date', now())->get();
         foreach ($sales as $sale) {
-            $body .= "Valor: " . $sale->value . " - Comissão" . $this->generateCommissionForSeller($sale->value) . " - Data: " . $sale->date . "\n" ;
+            $body .= "Valor: " . $sale->value . " - Comissão: " . $this->generateCommissionForSeller($sale->value) . " - Data: " . date("d/m/Y", strtotime($sale->date)) . "\n" ;
         }
         $this->sendReportByEmail($email, $name, $subject, $body);
     }
@@ -57,11 +56,4 @@ class AdminServices
         return $saleValue * 0.085;
     }
 
-    private function sendEmail($user, $body): void
-    {
-        Mail::raw($body, function ($message) use ($user) {
-            $message->to($user->email, 'Admin');
-            $message->subject('Relatório de vendas');
-        });
-    }
 }
