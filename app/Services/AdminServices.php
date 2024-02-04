@@ -5,7 +5,7 @@ namespace App\Services;
 use App\Models\Seller;
 use Illuminate\Support\Facades\Mail;
 
-class AdminServicescalculateTotalSales
+class AdminServices
 {
     public function generateReportForAllSellers(): void
     {
