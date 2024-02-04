@@ -5,9 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\Sale;
 use App\Models\Seller;
 use Illuminate\Http\Request;
+use App\Services\SaleServices;
 
 class SaleController extends Controller
 {
+
+    private SaleServices $saleServices;
+    public function __construct(SaleServices $saleServices)
+    {
+        $this->saleServices = $saleServices;
+    }
+
     public function index()
     {
         $sales = Sale::with('seller')->get();
@@ -22,16 +30,21 @@ class SaleController extends Controller
 
     public function store(Request $request)
     {
-
         $request->validate([
             'seller_id' => 'required|integer',
             'value' => 'required|numeric',
             'date' => 'required|date',
         ]);
 
-        $sale = Sale::create($request->all());
+        $data = array(
+            "seller_id" => $request->input('seller_id'),
+            "value" => $request->input('value'),
+            "date" => $request->input('date')
+        );
 
-        if ($sale) {
+        $inserted = $this->saleServices->insert($data);
+
+        if ($inserted) {
             return redirect()->back()->with('status', 'success')->with('message', 'Venda criada com sucesso!');
         }
 
@@ -54,19 +67,19 @@ class SaleController extends Controller
     public function update(int $id, Request $request)
     {
 
-        $sale = Sale::find($id);
-
-        if (!$sale) {
-            return redirect()->back()->with('status', 'error')->with('message', 'Venda não encontrada!');
-        }
-
         $request->validate([
             'seller_id' => 'required|integer',
             'value' => 'required|numeric',
             'date' => 'required|date',
         ]);
 
-        $updated = $sale->update($request->all());
+        $data = array(
+            "seller_id" => $request->input('seller_id'),
+            "value" => $request->input('value'),
+            "date" => $request->input('date')
+        );
+
+        $updated = $this->saleServices->update($data, $id);
 
         if ($updated) {
             return redirect()->back()->with('status', 'success')->with('message', 'Venda atualizada com sucesso!');
@@ -77,13 +90,7 @@ class SaleController extends Controller
 
     public function destroy(int $id)
     {
-        $sale = Sale::find($id);
-
-        if (!$sale) {
-            return redirect()->back()->with('status', 'error')->with('message', 'Venda não encontrada!');
-        }
-
-        $deleted = $sale->delete();
+        $deleted = $this->saleServices->delete($id);
 
         if ($deleted) {
             return redirect()->back()->with('status', 'success')->with('message', 'Venda excluída com sucesso!');
