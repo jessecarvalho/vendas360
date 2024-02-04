@@ -3,17 +3,17 @@
 namespace App\Services;
 
 use App\Models\Sale;
+use App\Helpers\FormatDate;
 
 class SaleServices
 {
     public function insert(array $data): bool
     {
-        $data['date'] = date('Y-m-d', strtotime($data['date']));
         $sale = new Sale(
             [
                 "seller_id" => $data['seller_id'],
                 "value" => $data['value'],
-                "date" => $data['date'],
+                "date" => FormatDate::format($data['date']),
             ]
         );
         return $sale->save();
@@ -27,7 +27,7 @@ class SaleServices
         }
         $sale->seller_id = $data['seller_id'];
         $sale->value = $data['value'];
-        $sale->date = date('Y-m-d', strtotime($data['date']));
+        $sale->date = FormatDate::format($data['date']);
         return $sale->save();
     }
 
