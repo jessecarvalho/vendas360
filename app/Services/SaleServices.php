@@ -8,6 +8,7 @@ class SaleServices
 {
     public function insert(array $data): bool
     {
+        $data['date'] = date('Y-m-d', strtotime($data['date']));
         $sale = new Sale(
             [
                 "seller_id" => $data['seller_id'],
@@ -26,7 +27,7 @@ class SaleServices
         }
         $sale->seller_id = $data['seller_id'];
         $sale->value = $data['value'];
-        $sale->date = $data['date'];
+        $sale->date = date('Y-m-d', strtotime($data['date']));
         return $sale->save();
     }
 
