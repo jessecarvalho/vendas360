@@ -35,17 +35,4 @@ class AdminController extends Controller
         return redirect()->route('dashboard')->with("status", "generate-unique-report-success")->with('message', 'Relatório enviado com sucesso');
     }
 
-    public function finishDay(Request $request): RedirectResponse
-    {
-        $password = $request->input('password');
-        $user = auth()->user();
-        if (!\Hash::check($password, $user->password)) {
-            return redirect()->route('dashboard')->with('status', 'finish-day-error')->with('message', 'Senha incorreta');
-        }
-        $this->adminServices->generateReportForAllSellers();
-        $this->adminServices->generateReportForAdmin($user);
-        return redirect()->route('dashboard')->with("status", "finish-day-success")->with('message', 'Relatórios enviados com sucesso');
-    }
-
-
 }

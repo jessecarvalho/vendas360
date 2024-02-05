@@ -25,7 +25,6 @@ Route::get('/', function () {
 
 Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
-    Route::post('/encerrar-dia', [AdminController::class, 'finishDay'])->name('finish-day');
     Route::post('/enviar-relatorio-para-vendedor', [AdminController::class, 'generateReportForUniqueSeller'])->name('send-report-to-seller');
 });
 

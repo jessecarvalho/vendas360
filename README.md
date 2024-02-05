@@ -20,6 +20,9 @@ Este é um sistema web desenvolvido para realizar o cadastro de vendedores e ven
 2. Com o docker em execução, execute o comando `docker-compose run app php artisan migrate --env=testing`, para criar o banco de dados de teste.
 3. Execute o comando `docker-compose run app php artisan test` para executar os testes.
 
+## Cronjob
+O sistema está configurado para enviar e-mails diariamente às 23:59 para o administrador e para os vendedores. O disparo está sendo configurado diretamente na criação da imagem do docker.
+
 ## Escolhas Técnicas
 
 <img height="25" src="https://laravel.com/img/logotype.min.svg"/>
