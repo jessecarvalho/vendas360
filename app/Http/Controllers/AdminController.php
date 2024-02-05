@@ -11,7 +11,7 @@ use App\Services\AdminServices;
 
 class AdminController extends Controller
 {
-    private $adminServices;
+    private AdminServices $adminServices;
 
     public function __construct(AdminServices $adminServices)
     {
@@ -31,20 +31,19 @@ class AdminController extends Controller
         if (!$seller) {
             return redirect()->route('dashboard')->with('status', 'generate-unique-report-error')->with('message', 'Vendedor não encontrado');
         }
-        $this->adminServices->generateReport($seller);
+        $this->adminServices->generateReportForSeller($seller);
         return redirect()->route('dashboard')->with("status", "generate-unique-report-success")->with('message', 'Relatório enviado com sucesso');
     }
 
     public function finishDay(Request $request): RedirectResponse
     {
-
         $password = $request->input('password');
         $user = auth()->user();
         if (!\Hash::check($password, $user->password)) {
             return redirect()->route('dashboard')->with('status', 'finish-day-error')->with('message', 'Senha incorreta');
         }
         $this->adminServices->generateReportForAllSellers();
-        $this->adminServices->generateReportEmailForAdmin($user);
+        $this->adminServices->generateReportForAdmin($user);
         return redirect()->route('dashboard')->with("status", "finish-day-success")->with('message', 'Relatórios enviados com sucesso');
     }
 

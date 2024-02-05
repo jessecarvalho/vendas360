@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Sale;
 use App\Models\Seller;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Services\SaleServices;
+use Illuminate\View\View;
 
 class SaleController extends Controller
 {
@@ -16,19 +18,19 @@ class SaleController extends Controller
         $this->saleServices = $saleServices;
     }
 
-    public function index()
+    public function index() : View
     {
         $sales = Sale::with('seller')->get();
         return view('sales.index', compact('sales'));
     }
 
-    public function create()
+    public function create() : View
     {
         $sellers = Seller::all();
         return view('sales.create', compact('sellers'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request) : RedirectResponse
     {
         $request->validate([
             'seller_id' => 'required|integer',
@@ -51,7 +53,7 @@ class SaleController extends Controller
         return redirect()->back()->with('status', 'error')->with('message', 'Erro ao criar venda!');
     }
 
-    public function edit(int $id)
+    public function edit(int $id) : View | RedirectResponse
     {
         $sale = Sale::find($id);
 
@@ -64,7 +66,7 @@ class SaleController extends Controller
         return view('sales.edit', compact('sale', 'sellers'));
     }
 
-    public function update(int $id, Request $request)
+    public function update(int $id, Request $request) : RedirectResponse
     {
 
         $request->validate([
@@ -88,7 +90,7 @@ class SaleController extends Controller
         return redirect()->back()->with('status', 'error')->with('message', 'Erro ao atualizar venda!');
     }
 
-    public function destroy(int $id)
+    public function destroy(int $id) : RedirectResponse
     {
         $deleted = $this->saleServices->delete($id);
 

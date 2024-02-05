@@ -11,20 +11,10 @@ class AdminServices
     {
         $sellers = Seller::all();
         foreach ($sellers as $seller) {
-            $sales = $seller->sales()->whereDate('date', now())->get();
-            $totalSales = $this->calculateTotalSales($sales);
-            $totalValue = $this->calculateTotalValue($sales);
-            $totalCommission = $this->calculateTotalCommission($sales);
-
-            $body = "Olá, " . $seller->name . ". Segue seu relatório de vendas do dia: \n";
-            $body .= "Quantidade de vendas: " . $totalSales . "\n";
-            $body .= "Valor total das vendas: " . $totalValue . "\n";
-            $body .= "Valor total das comissões: " . $totalCommission . "\n";
-
-            $this->sendReportByEmail($seller->email, $seller->name, "Relatório de vendas do dia", $body);
+            $this->generateReportForSeller($seller);
         }
     }
-    public function generateReportEmailForAdmin($user) : void
+    public function generateReportForAdmin($user) : void
     {
         $sellers = Seller::all();
         $totalSalesValue = 0;
@@ -39,17 +29,19 @@ class AdminServices
         $this->sendReportByEmail($user->email, $user->name, "Relatório de vendas do dia", $body);
     }
 
-    public function generateReport(mixed $seller): void
+    public function generateReportForSeller(mixed $seller): void
     {
-        $email = $seller->email;
-        $name = $seller->name;
-        $subject = "Relatório de vendas";
-        $body = "Olá, " . $name . ". Segue seu relatório de vendas: " . "\n";
+        $subject = "Relatório de vendas do dia";
         $sales = $seller->sales()->whereDate('date', now())->get();
-        foreach ($sales as $sale) {
-            $body .= "Valor: " . $sale->value . " - Comissão: " . $this->generateCommissionForSeller($sale->value) . " - Data: " . date("d/m/Y", strtotime($sale->date)) . "\n" ;
-        }
-        $this->sendReportByEmail($email, $name, $subject, $body);
+        $totalSales = $this->calculateTotalSales($sales);
+        $totalValue = $this->calculateTotalValue($sales);
+        $totalCommission = $this->calculateTotalCommission($sales);
+        $body = "Olá, " . $seller->name . ". Segue seu relatório de vendas do dia: \n";
+        $body .= "Quantidade de vendas: " . $totalSales . "\n";
+        $body .= "Valor total das vendas: " . $totalValue . "\n";
+        $body .= "Valor total das comissões: " . $totalCommission . "\n";
+
+        $this->sendReportByEmail($seller->email, $seller->name, $subject, $body);
     }
 
     private function sendReportByEmail($email, $name, $subject, $body): void
