@@ -33,13 +33,7 @@ class SendDailyReportJob implements ShouldQueue
      */
     public function handle()
     {
-        $users = User::all();
-        if ($users->isEmpty()) {
-            return;
-        }
-        foreach ($users as $user) {
-            $this->adminServices->generateReportForAdmin($user);
-        }
+        $this->adminServices->generateReportForAdmin();
         $this->adminServices->generateReportForAllSellers();
 
     }

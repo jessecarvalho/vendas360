@@ -2,7 +2,9 @@
 
 namespace App\Services;
 
+use App\Models\Sale;
 use App\Models\Seller;
+use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 
 class AdminServices
@@ -14,19 +16,20 @@ class AdminServices
             $this->generateReportForSeller($seller);
         }
     }
-    public function generateReportForAdmin($user) : void
+    public function generateReportForAdmin() : void
     {
-        $sellers = Seller::all();
-        $totalSalesValue = 0;
-        foreach ($sellers as $seller) {
-            $sales = $seller->sales()->whereDate('date', now())->get();
-            $totalSalesValue += $this->calculateTotalValue($sales);
+        $users = User::all();
+        if ($users->isEmpty()) {
+            return;
         }
 
-        $body = "Olá, " . $user->name . ". Segue o relatório de vendas do dia: \n";
-        $body .= "Valor total das vendas: " . $totalSalesValue . "\n";
+        $totalSalesValue = $this->getAllSalesForToday();
 
-        $this->sendReportByEmail($user->email, $user->name, "Relatório de vendas do dia", $body);
+        foreach ($users as $user) {
+            $body = "Olá, " . $user->name . ". Segue o relatório de vendas do dia: \n";
+            $body .= "Valor total das vendas: " . $totalSalesValue . "\n";
+            $this->sendReportByEmail($user->email, $user->name, "Relatório de vendas do dia", $body);
+        }
     }
 
     public function generateReportForSeller(mixed $seller): void
@@ -65,6 +68,11 @@ class AdminServices
     private function calculateTotalSales($sales): int
     {
         return $sales->count();
+    }
+
+    private function getAllSalesForToday()
+    {
+        return Sale::whereDate('date', now())->sum('value');
     }
 
 }
