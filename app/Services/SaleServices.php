@@ -44,7 +44,8 @@ class SaleServices
 
     protected function getCommissionForSale(float $value): float
     {
-        return $value * 0.085;
+        $admin = Admin::first();
+        return $value * ($admin->commission / 100);
     }
 
 }
