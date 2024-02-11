@@ -11,7 +11,7 @@
         <h2>Relatório de vendas</h2>
         <p><b>Quantidade de vendas: </b> {{ $data["totalSales"] }} </p>
         <p><b>Valor total de vendas: </b> R$ {{ number_format($data["totalValue"], 2, ',', '.') }} </p>
-        <p><b>Valor total de comissões: </b> {{ number_format($data["totalCommission"], 2, ',', '.') }} </p>
+        <p><b>Valor total de comissões: </b> R$ {{ number_format($data["totalCommission"], 2, ',', '.') }} </p>
     </div>
 </body>
 </html>
