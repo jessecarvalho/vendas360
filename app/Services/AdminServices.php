@@ -2,6 +2,9 @@
 
 namespace App\Services;
 
+use App\Mail\AdminReportMail;
+use App\Mail\SellerReportMail;
+use App\Models\Admin;
 use App\Models\Sale;
 use App\Models\Seller;
 use App\Models\User;
@@ -9,6 +12,21 @@ use Illuminate\Support\Facades\Mail;
 
 class AdminServices
 {
+
+    public function update($data): bool
+    {
+        $admin = Admin::first();
+
+        if (!$admin) {
+            $admin = new Admin();
+        }
+
+
+        $admin->email = $data['email'];
+        $admin->commission = $data['commission'];
+        return $admin->save();
+
+    }
     public function generateReportForAllSellers(): void
     {
         $sellers = Seller::all();
@@ -24,11 +42,12 @@ class AdminServices
         }
 
         $totalSalesValue = $this->getAllSalesForToday();
-
+        $subject = "Relatório de vendas do dia";
         foreach ($users as $user) {
-            $body = "Olá, " . $user->name . ". Segue o relatório de vendas do dia: \n";
-            $body .= "Valor total das vendas: " . $totalSalesValue . "\n";
-            $this->sendReportByEmail($user->email, $user->name, "Relatório de vendas do dia", $body);
+            $data = [
+                'totalSales' => $totalSalesValue,
+            ];
+            $this->sendReportByEmail($user->email, $user->name, $subject, $data, "admin");
         }
     }
 
@@ -39,20 +58,26 @@ class AdminServices
         $totalSales = $this->calculateTotalSales($sales);
         $totalValue = $this->calculateTotalValue($sales);
         $totalCommission = $this->calculateTotalCommission($sales);
-        $body = "Olá, " . $seller->name . ". Segue seu relatório de vendas do dia: \n";
-        $body .= "Quantidade de vendas: " . $totalSales . "\n";
-        $body .= "Valor total das vendas: " . $totalValue . "\n";
-        $body .= "Valor total das comissões: " . $totalCommission . "\n";
 
-        $this->sendReportByEmail($seller->email, $seller->name, $subject, $body);
+        $data = [
+            'totalSales' => $totalSales,
+            'totalValue' => $totalValue,
+            'totalCommission' => $totalCommission,
+        ];
+
+        $this->sendReportByEmail($seller->email, $seller->name, $subject, $data, "seller");
     }
 
-    private function sendReportByEmail($email, $name, $subject, $body): void
+    private function sendReportByEmail($email, $name, $subject, $data, $role): void
     {
-        Mail::raw($body, function ($message) use ($email, $name, $subject) {
-            $message->to($email, $name);
-            $message->subject($subject);
-        });
+        if ($role == "admin"){
+            $reportEmail = new AdminReportMail($subject, $data);
+        } else if ($role == "seller"){
+            $reportEmail = new SellerReportMail($subject, $data);
+        }
+
+        if ($role) Mail::to($email, $name)->send($reportEmail);
+
     }
 
     private function calculateTotalCommission($sales): float
