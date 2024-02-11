@@ -13,6 +13,7 @@ class SaleServices
             [
                 "seller_id" => $data['seller_id'],
                 "value" => $data['value'],
+                "commission" => $this->getCommissionForSale($data['value']),
                 "date" => FormatDate::format($data['date']),
             ]
         );
@@ -27,6 +28,7 @@ class SaleServices
         }
         $sale->seller_id = $data['seller_id'];
         $sale->value = $data['value'];
+        $sale->commission = $this->getCommissionForSale($data['value']);
         $sale->date = FormatDate::format($data['date']);
         return $sale->save();
     }
@@ -38,6 +40,11 @@ class SaleServices
             return false;
         }
         return $sale->delete();
+    }
+
+    protected function getCommissionForSale(float $value): float
+    {
+        return $value * 0.085;
     }
 
 }

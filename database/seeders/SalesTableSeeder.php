@@ -17,6 +17,7 @@ class SalesTableSeeder extends Seeder
             DB::table('sales')->insert([
                 'value' => rand(100, 1000),
                 'date' => now(),
+                'commission' => rand(10, 100),
                 'seller_id' => $seller->id,
             ]);
         }

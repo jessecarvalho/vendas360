@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->decimal('value', 8, 2);
             $table->date('date');
+            $table->decimal('commission', 8, 2);
             $table->foreignId('seller_id')->constrained('sellers');
             $table->timestamps();
         });
