@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Seller;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -13,11 +14,8 @@ class SellersTableSeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i = 0; $i < 3; $i++) {
-            DB::table('sellers')->insert([
-                'name' => Str::random(10),
-                'email' => Str::random(10).'@gmail.com',
-            ]);
-        }
+        Seller::factory()
+            ->count(3)
+            ->create();
     }
 }
