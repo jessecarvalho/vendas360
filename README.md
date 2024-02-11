@@ -1,65 +1,40 @@
-# Plataforma vendedor
+# Vendas 360
 
-Este é um sistema web desenvolvido para realizar o cadastro de vendedores e vendas, bem como calcular a comissão sobre as vendas realizadas.
+This is a web system developed to register sellers and sales, as well as calculate the commission on sales made. The system also sends daily emails to the administrator and sellers with the sales made on the day.
 
-## Como executar o projeto
+## How to run the project
 
-1. Clone este repositório com o comando git clone git@github.com:jessecarvalho/tray.git
-2. Acesse a pasta do projeto com o comando `cd tray`.
-3. Crie um arquivo `.env` na raiz do projeto e copie o conteúdo do arquivo `.env.example` para ele.
-4. Configure o arquivo `.env` com as informações do seu banco de dados.
-5. Configure o arquivo `.env` com as informações de um provedor de e-mail smtp de sua preferência, está configurado para enviar e-mails com o Mailtrap.
-6. Execute o docker com o comando `docker-compose up --build -d`.
-7. Caso haja interesse em popular o banco de dados execute os seeds com o comando `docker-compose exec app php artisan db:seed`. 
-8. Acesse a aplicação em `http://localhost:8000`.
+1. Clone this repository with the command `git clone git@github.com:jessecarvalho/tray.git`.
+2. Access the project folder with the command `cd tray`.
+3. Create a `.env` file at the root of the project and copy the content of the `.env.example` file into it.
+4. Configure the `.env` file with your database information.
+5. Configure the `.env` file with the information of your preferred smtp email provider, it is set up to send emails with Mailtrap.
+6. Run the docker with the command `docker-compose up --build -d`.
+7. If you are interested in populating the database, run the seeds with the command `docker-compose exec app php artisan db:seed`.
+8. Access the application at `http://localhost:8000`.
 
-## Como executar os testes
-1. Configure o arquivo `.env.testing` com as informações do seu banco de dados de teste.
-2. Com o docker em execução, execute o comando `docker-compose exec app php artisan migrate --env=testing`, para criar o banco de dados de teste.
-3. Execute o comando `docker-compose run app php artisan test` para executar os testes.
+## How to run the tests
+1. Configure the `.env.testing` file with your test database information.
+2. With docker running, execute the command `docker-compose exec app php artisan migrate --env=testing` to create the test database.
+3. Execute the command `docker-compose run app php artisan test` to run the tests.
 
 ## Cronjob
-O sistema está configurado para enviar e-mails diariamente às 23:59 para o administrador e para os vendedores. O disparo está sendo configurado diretamente na criação da imagem do docker.
+The system is set up to send emails daily at 23:59 to the administrator and to the sellers. The trigger is being set up directly in the creation of the docker image.
 
-## Escolhas Técnicas
+## Technologies used
 
 <img height="25" src="https://laravel.com/img/logotype.min.svg"/>
 
-Para o Backend optei por utilizar PHP com o framework Laravel, por ser um framework robusto com rápido setup e que fazia sentido para a vaga.
+For the backend, I chose to use Laravel, because it is a framework that I have a lot of contact with and that I have a lot of confidence in. It is also a good choice for a small project like this, as it is a framework that has a lot of resources and is easy to use.
 
 <img height="25" src="https://blade-ui-kit.com/images/logo.svg"/>
 
-Para o frontend, optei por utilizar blade-ui-kit, por ser um framework de componentes para Laravel que facilita a criação de interfaces e obedecia aos requisitos do desafio.
+For the frontend, I chose to use Blade UI Kit, because it is a good choice for small projects. 
 
 <img height="50" src="https://www.mysql.com/common/logos/logo-mysql-170x115.png"/>
 
-Para o banco de dados optei por utilizar MySQL, por ser um banco de dados relacional que tenho bastante contato e que também atende aos requisitos do desafio.
+I chose to use MySQL as the database, because it is a database that I have a lot of contact with and that I have a lot of confidence in.
 
 <img height="50" src="https://miro.medium.com/v2/resize:fit:512/1*JEHLmWo6_SrpHPiP4AimIw.png"/>
 
-Também optei por utilizar o tailwind css, por ser um framework css que facilita a criação de interfaces e é uma boa escolha para projetos pequenos e com prazo curto.
-
-
-## Screenshots
-
-<img width="100%" src="https://github.com/jessecarvalho/tray/blob/main/public/screenshots/2024-02-04%2019.29.31%200.0.0.0%209cd1510a26e2.png"/>
-
----
-
-<img width="100%" src="https://github.com/jessecarvalho/tray/blob/main/public/screenshots/2024-02-04%2019.29.42%200.0.0.0%20a018fbd78ef4.png"/>
-
----
-
-<img width="100%" src="https://github.com/jessecarvalho/tray/blob/main/public/screenshots/2024-02-04%2019.29.58%200.0.0.0%20f38e9e45222e.png"/>
-
----
-
-<img width="100%" src="https://github.com/jessecarvalho/tray/blob/main/public/screenshots/2024-02-04%2019.30.12%200.0.0.0%20d87345f9eee3.png"/>
-
----
-
-<img width="100%" src="https://github.com/jessecarvalho/tray/blob/main/public/screenshots/2024-02-04%2019.30.22%200.0.0.0%20d6cb9cbd78bc.png"/>
-
----
-
-<img width="100%" src="https://github.com/jessecarvalho/tray/blob/main/public/screenshots/2024-02-04%2019.30.40%200.0.0.0%207e811b0fd310.png"/>
+I chose to use Docker to run the application because it is a tool that makes it easy to run the application in any environment.
