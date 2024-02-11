@@ -33,7 +33,15 @@
                                 <x-text-input min="0" max="99" id="admin_commission" class="block w-full" type="number" onKeyUp="if(this.value>99){this.value='99';}else if(this.value<0){this.value='0';}"  name="commission" :value="old('commission',  isset($admin) ? $admin['commission'] : '')" required autofocus />
                                 <x-input-error class="mt-2" :messages="$errors->get('admin_commission')" />
                             </div>
-
+                            @if (session('status') === 'update-admin-info-success')
+                                <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 5000)" class="text-sm text-green-600 dark:text-gray-400"
+                                >{{ __(session('message')) }}</p>
+                            @elseif(session('status') === 'update-admin-info-error')
+                                <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 5000)" class="text-sm text-red-600 dark:text-red-400"
+                                >
+                                    {{ __(session('message')) }}
+                                </p>
+                            @endif
                             <button class="bg-blue-500 text-white px-4 py-2 rounded-md mt-4">Salvar</button>
                     </form>
                 </div>
@@ -51,7 +59,7 @@
                         <p class="mt-6 mb-2">Não há vendedores cadastrados no momento.</p>
                         <a clas href="{{ route('sellers.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded-md ">Cadastrar vendedor</a>
                     @else
-                        <form method="post" action="{{ route('send-report-to-seller', ) }}" class="mt-6 space-y-6">
+                        <form method="post" action="{{ route('send-report-to-seller', ) }}" class="mt-6 space-y-2">
                             @csrf
                             @method('post')
 
