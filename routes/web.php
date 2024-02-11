@@ -26,6 +26,7 @@ Route::get('/', function () {
 Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
     Route::post('/enviar-relatorio-para-vendedor', [AdminController::class, 'generateReportForUniqueSeller'])->name('send-report-to-seller');
+    Route::put("/alterar-info-administrador", [AdminController::class, 'update'])->name('update-admin-info');
 });
 
 Route::middleware(['auth', 'verified'])->prefix('vendedores')->group(function () {
