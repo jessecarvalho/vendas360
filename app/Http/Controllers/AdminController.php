@@ -40,11 +40,13 @@ class AdminController extends Controller
     public function update(Request $request): RedirectResponse
     {
         $request->validate([
+            'name' => 'required',
             'email' => 'required|email',
             'commission' => 'required|numeric'
         ]);
 
         $data = array(
+            "name" => $request->input('name'),
             "email" => $request->input('email'),
             "commission" => $request->input('commission')
         );

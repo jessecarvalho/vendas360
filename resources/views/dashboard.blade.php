@@ -18,14 +18,19 @@
                         @method('put')
                         @csrf
                         <div class="mt-6 space y-6 gap-2">
-                            <div>
+                            <div class="my-2">
+                                <x-input-label for="admin_name" :value="__('Nome do administrador')" />
+                                <x-text-input id="admin_name" class="block w-full" type="text" name="name" :value="old('name', isset($admin) ? $admin['name'] : '')" required autofocus />
+                                <x-input-error class="mt-2" :messages="$errors->get('admin_name')" />
+                            </div>
+                            <div class="my-2">
                                 <x-input-label for="admin_email" :value="__('E-mail do administrador')" />
-                                <x-text-input id="admin_email" class="block w-full" type="email" name="email" :value="old(' email', $admin['email'])" required autofocus />
+                                <x-text-input id="admin_email" class="block w-full" type="email" name="email" :value="old(' email', isset($admin) ? $admin['email'] : '')" required autofocus />
                                 <x-input-error class="mt-2" :messages="$errors->get('admin_email')" />
                             </div>
-                            <div>
+                            <div class="my-2">
                                 <x-input-label for="admin_commission" :value="__('Comissão definida (%)')" />
-                                <x-text-input min="0" max="99" id="admin_commission" class="block w-full" type="number" onKeyUp="if(this.value>99){this.value='99';}else if(this.value<0){this.value='0';}"  name="commission" :value="old('commission', $admin['commission'])" required autofocus />
+                                <x-text-input min="0" max="99" id="admin_commission" class="block w-full" type="number" onKeyUp="if(this.value>99){this.value='99';}else if(this.value<0){this.value='0';}"  name="commission" :value="old('commission',  isset($admin) ? $admin['commission'] : '')" required autofocus />
                                 <x-input-error class="mt-2" :messages="$errors->get('admin_commission')" />
                             </div>
 

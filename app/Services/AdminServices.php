@@ -21,7 +21,7 @@ class AdminServices
             $admin = new Admin();
         }
 
-
+        $admin->name = $data['name'];
         $admin->email = $data['email'];
         $admin->commission = $data['commission'];
         return $admin->save();
@@ -82,7 +82,7 @@ class AdminServices
 
     private function calculateTotalCommission($sales): float
     {
-        return $sales->sum('value') * 0.085;
+        return $sales->sum('commission');
     }
 
     private function calculateTotalValue($sales): float
