@@ -18,14 +18,11 @@
         <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter selection:text-white bg-gradient-to-r from-blue-900 to-blue-700">
 
             <div>
-                <div class="flex items-center w-full justify-center mb-3">
-                    <img src="{{ @asset("logo-branco.svg")  }}" alt="Logo da Tray">
-                </div>
-                <h2 class="text-5xl uppercase font-black text-white">Plataforma vendedor</h2>
+                <h2 class="text-5xl uppercase font-black text-white">Vendas360</h2>
                 <h3 class="text-xl text-center text-white">Seja bem vindo</h3>
 
                 @if (Route::has('login'))
-                    <div class="flex justify-between w-1/2 m-auto mt-10">
+                    <div class="flex justify-between w-1/2 m-auto mt-10 w-full">
                         @auth
                             <a href="{{ url('/dashboard') }}" class="border border-blue-500 text-white py-3 rounded w-full text-center font-semibold dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm hover:bg-white hover:text-black">Dashboard</a>
                         @else
