@@ -48,3 +48,4 @@ RUN php artisan key:generate
 # Define o script de entrada como ponto de entrada do contêiner
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 
+EXPOSE 8000
