@@ -7,18 +7,17 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch:
 
 jobs:
   build:
     runs-on: 'ubuntu-latest'
 
     steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
     - name: Rename .env.production to .env
-      run: |
-        cd ../..
-        mv .env.production .env
+      run: mv .env.production .env
 
     - name: Set Environment Variables in .env
       run: |
