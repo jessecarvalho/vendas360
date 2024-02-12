@@ -1,7 +1,4 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
-name: Build and deploy container app to Azure Web App - vendas360
+name: Build and Push to Azure Container Registry
 
 on:
   push:
@@ -9,50 +6,33 @@ on:
       - main
 
 jobs:
-  build:
-    runs-on: 'ubuntu-latest'
-
-    steps:
-
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Rename .env.production to .env
-      run: mv .env.production .env
-
-    - name: Set Environment Variables in .env
-      run: |
-        echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" >> .env
-        echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> .env
-        echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
-        echo "MAIL_HOST=${{ secrets.MAIL_HOST }}" >> .env
-        echo "MAIL_USERNAME=${{ secrets.MAIL_USERNAME }}" >> .env
-        echo "MAIL_PASSWORD=${{ secrets.MAIL_PASSWORD }}" >> .env
-        echo "MAIL_FROM_ADDRESS=${{ secrets.MAIL_FROM_ADDRESS }}" >> .env
-        echo "MAIL_FROM_NAME=${{ secrets.MAIL_FROM_NAME }}" >> .env
-
-    - name: Log in to registry
-      uses: azure/docker-login@v1
-      with:
-        registry: https://vendas360.azurecr.io/
-        username: ${{ secrets.REGISTRY_USERNAME }}
-        password: ${{ secrets.REGISTRY_PASSWORD }}
-
-    - name: Build and push container image to registry
-      uses: docker/build-push-action@v3
-      with:
-        push: true
-        tags: vendas360.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_56e687f5a62f48968c74e68b5af82650 }}/app:${{ github.sha }}
-        file: ./Dockerfile
-
-  deploy:
+  build-and-push:
     runs-on: ubuntu-latest
-    needs: build
-    environment:
-      name: 'production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Rename .env.production to .env
+        run: mv .env.production .env
+
+      - name: Set Environment Variables in .env
+        run: |
+          echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" >> .env
+          echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> .env
+          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
+          echo "MAIL_HOST=${{ secrets.MAIL_HOST }}" >> .env
+          echo "MAIL_USERNAME=${{ secrets.MAIL_USERNAME }}" >> .env
+          echo "MAIL_PASSWORD=${{ secrets.MAIL_PASSWORD }}" >> .env
+          echo "MAIL_FROM_ADDRESS=${{ secrets.MAIL_FROM_ADDRESS }}" >> .env
+          echo "MAIL_FROM_NAME=${{ secrets.MAIL_FROM_NAME }}" >> .env
+      - name: Log in to Azure Container Registry
+        uses: azure/docker-login@v1
+        with:
+          login-server: vendas360.azurecr.io
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+
       - name: Build and push Docker image
         run: |
           docker build -t vendas360.azurecr.io/app:latest .
