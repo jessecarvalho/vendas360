@@ -20,9 +20,6 @@ jobs:
     - name: Rename .env.production to .env
       run: mv .env.production .env
 
-    - name: Rename .env.production to .env
-      run: mv .env.production .env
-
     - name: Set Environment Variables in .env
       run: |
         echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" >> .env
