@@ -35,5 +35,5 @@ jobs:
 
       - name: Build and push Docker image to Docker Hub
         run: |
-          docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/app:latest .
-          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/app:latest
+          docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/vendas360:latest .
+          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/vendas360:latest
