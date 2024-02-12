@@ -14,6 +14,21 @@ jobs:
     runs-on: 'ubuntu-latest'
 
     steps:
+
+    - name: Rename .env.production to .env
+      run: mv .env.production .env
+
+    - name: Set Environment Variables in .env
+      run: |
+        echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" >> .env
+        echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> .env
+        echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
+        echo "MAIL_HOST=${{ secrets.MAIL_HOST }}" >> .env
+        echo "MAIL_USERNAME=${{ secrets.MAIL_USERNAME }}" >> .env
+        echo "MAIL_PASSWORD=${{ secrets.MAIL_PASSWORD }}" >> .env
+        echo "MAIL_FROM_ADDRESS=${{ secrets.MAIL_FROM_ADDRESS }}" >> .env
+        echo "MAIL_FROM_NAME=${{ secrets.MAIL_FROM_NAME }}" >> .env
+
     - uses: actions/checkout@v2
 
     - name: Set up Docker Buildx
