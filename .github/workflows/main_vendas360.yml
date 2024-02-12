@@ -42,9 +42,6 @@ jobs:
         username: ${{ secrets.AzureAppService_ContainerUsername_56e687f5a62f48968c74e68b5af82650 }}
         password: ${{ secrets.AzureAppService_ContainerPassword_c4a1a3a3f75c47e89c17fd355db5c64a }}
 
-    - name: Rename .env.production to .env
-      run: mv /var/www/html/.env.production /var/www/html/.env
-
     - name: Build and push container image to registry
       uses: docker/build-push-action@v3
       with:
