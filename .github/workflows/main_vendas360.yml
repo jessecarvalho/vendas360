@@ -13,6 +13,9 @@ jobs:
     runs-on: 'ubuntu-latest'
 
     steps:
+    - name: Rename .env.production to .env
+      run: mv .env.production .env
+
     - name: Checkout repository
       uses: actions/checkout@v2
 

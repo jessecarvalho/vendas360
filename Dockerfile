@@ -33,8 +33,6 @@ WORKDIR /var/www/html
 # Copia o código da aplicação
 COPY . .
 
-COPY .env /var/www/html/.env
-
 # Instalação das dependências PHP
 RUN composer install --no-interaction
 
