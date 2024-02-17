@@ -7,8 +7,6 @@ services:
             MYSQL_ROOT_PASSWORD: 1234qwer
         ports:
             - "3307:3306"
-        volumes:
-            - db_data:/var/lib/mysql
     app:
         build:
             context: .
@@ -19,11 +17,4 @@ services:
             - .:/var/www/html
         depends_on:
             - db
-        networks:
-            - app_network
-networks:
-    app_network:
-        driver: bridge
 
-volumes:
-    db_data:
