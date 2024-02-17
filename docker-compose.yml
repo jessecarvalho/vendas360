@@ -16,5 +16,5 @@ services:
             MYSQL_DATABASE: tray
             MYSQL_ROOT_PASSWORD: 1234qwer
         ports:
-            - "3306:3306"
+            - "3307:3306"
 
