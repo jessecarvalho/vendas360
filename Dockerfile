@@ -23,7 +23,7 @@ RUN curl -sL https://deb.nodesource.com/setup_21.x | bash - && \
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Configuração do driver de log
-RUN echo '{ "log-driver": "json-file" }' > /etc/docker/daemon.json
+RUN mkdir -p /etc/docker && echo '{ "log-driver": "json-file" }' > /etc/docker/daemon.json
 
 # Copia o script de entrada
 COPY docker-entrypoint.sh /usr/local/bin/
