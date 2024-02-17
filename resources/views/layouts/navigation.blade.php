@@ -16,10 +16,10 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                     <x-nav-link :href="route('sellers.index')" :active="Str::startsWith(request()->route()->getName(), 'sellers.')">
-                        {{ __('Vendedores') }}
+                        {{ __('Sellers') }}
                     </x-nav-link>
                     <x-nav-link :href="route('sales.index')" :active="Str::startsWith(request()->route()->getName(), 'sales.')">
-                        {{ __('Vendas') }}
+                        {{ __('Sales') }}
                     </x-nav-link>
 
                 </div>

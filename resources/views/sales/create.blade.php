@@ -11,35 +11,35 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
 
                     @if (count($sellers) === 0)
-                        <h2 class="text-xl font-semibold">Não é possível cadastrar nova venda sem nenhum vendedor cadastrado</h2>
-                        <h3>Portanto <a href="{{ route('sellers.create') }}" class="mt-3 text-blue-500 font-bold">cadastre um novo vendedor</a> primeiro</h3>
+                        <h2 class="text-xl font-semibold">"It is not possible to register a new sale without any registered seller</h2>
+                        <h3>Portanto <a href="{{ route('sellers.create') }}" class="mt-3 text-blue-500 font-bold">Register a new seller</a> first</h3>
 
                     @else
-                        <h2 class="text-xl font-semibold">Cadastre uma nova venda</h2>
-                        <h3>Use o formulário abaixo para cadastrar uma nova venda</h3>
+                        <h2 class="text-xl font-semibold">Register a new sale</h2>
+                        <h3>Use the form below to register a new sale</h3>
                         <form method="post" action="{{ route('sales.store') }}" class="mt-6 space-y-6">
                             @csrf
                             @method('post')
 
                             <div>
-                                <x-input-label for="value" :value="__('Valor da venda')" />
+                                <x-input-label for="value" :value="__('Sale value')" />
                                 <x-text-input id="value" name="value" type="text" class="mt-1 block w-full" required autofocus autocomplete="value"
-                                              placeholder="Digite aqui o valor do venda" />
+                                              placeholder="Enter the sale value here" />
                                 <x-input-error class="mt-2" :messages="$errors->get('value')" />
                             </div>
 
                             <div>
-                                <x-input-label for="date" :value="__('Data da venda')" />
+                                <x-input-label for="date" :value="__('Sale date')" />
                                 <x-text-input id="date" name="date" type="text" value="{{date('d/m/Y', strtotime(now()))}}" class="mt-1 block
-                                w-full" required autocomplete="date" placeholder="Digite aqui a data da venda" />
+                                w-full" required autocomplete="date" placeholder="Enter the sale date here" />
                                 <x-input-error class="mt-2" :messages="$errors->get('date')" />
                             </div>
 
                             <div>
-                                <x-input-label for="seller_id" :value="__('Vendedor')" />
+                                <x-input-label for="seller_id" :value="__('Seller')" />
                                 <x-select-input id="seller_id" name="seller_id" class="mt-1 block
                                 w-full" required autofocus autocomplete="seller_id">
-                                    <option value="">Selecione um vendedor</option>
+                                    <option value="">Select a seller</option>
                                     @foreach($sellers as $seller)
                                         <option value="{{ $seller->id }}">{{ $seller->name }}</option>
                                     @endforeach
@@ -48,7 +48,7 @@
                             </div>
 
                             <div class="flex items-center gap-4">
-                                <x-primary-button>{{ __('Salvar') }}</x-primary-button>
+                                <x-primary-button>{{ __('Save') }}</x-primary-button>
 
                                 @if (session('status') === 'success')
                                     <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)" class="text-sm text-green-600 dark:text-gray-400">

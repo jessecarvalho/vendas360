@@ -18,17 +18,17 @@
 
             <div>
                 <h2 class="text-5xl uppercase font-black text-white">Vendas360</h2>
-                <h3 class="text-xl text-center text-white">Seja bem vindo</h3>
+                <h3 class="text-xl text-center text-white">Be welcome</h3>
 
                 @if (Route::has('login'))
                     <div class="flex justify-between w-1/2 m-auto mt-10 w-full">
                         @auth
                             <a href="{{ url('/dashboard') }}" class="border border-blue-500 text-white py-3 rounded w-full text-center font-semibold dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm hover:bg-white hover:text-black">Dashboard</a>
                         @else
-                            <a href="{{ route('login') }}" class="border border-blue-500 text-white py-3 rounded w-1/2 text-center font-semibold dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm hover:bg-white hover:text-black">Entrar</a>
+                            <a href="{{ route('login') }}" class="border border-blue-500 text-white py-3 rounded w-1/2 text-center font-semibold dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm hover:bg-white hover:text-black">Login</a>
 
                             @if (Route::has('register'))
-                                <a href="{{ route('register') }}" class="w-1/2 text-center py-3 text-white rounded border border-blue-500 ml-4 font-semibold dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm hover:bg-white hover:text-black">Registrar</a>
+                                <a href="{{ route('register') }}" class="w-1/2 text-center py-3 text-white rounded border border-blue-500 ml-4 font-semibold dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm hover:bg-white hover:text-black">Register</a>
                             @endif
                         @endauth
                     </div>
