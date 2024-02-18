@@ -5,12 +5,16 @@ until mysqladmin ping -h"db" --silent; do
   sleep 1
 done
 
+# Movendo para o diretório do código da aplicação Laravel
+cd /var/www/html
+
+# Executando as migrações do Laravel
 php artisan migrate --force
 
-# Roda o php artisan serve em segundo plano
+# Iniciando o servidor web
 php artisan serve --host=0.0.0.0 --port=8000 &
 
-# Roda o schedule:work
+# Rodando o schedule:work
 php artisan schedule:work
 
 exec "$@"
