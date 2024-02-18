@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Sale;
+use App\Models\Admin;
 use App\Helpers\FormatDate;
 
 class SaleServices

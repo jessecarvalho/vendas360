@@ -47,10 +47,10 @@ class SaleController extends Controller
         $inserted = $this->saleServices->insert($data);
 
         if ($inserted) {
-            return redirect()->back()->with('status', 'success')->with('message', 'Venda criada com sucesso!');
+            return redirect()->back()->with('status', 'success')->with('message', 'Sale created successfully!');
         }
 
-        return redirect()->back()->with('status', 'error')->with('message', 'Erro ao criar venda!');
+        return redirect()->back()->with('status', 'error')->with('message', 'Error when trying to create sale');
     }
 
     public function edit(int $id) : View | RedirectResponse
@@ -58,7 +58,7 @@ class SaleController extends Controller
         $sale = Sale::find($id);
 
         if (!$sale) {
-            return redirect()->back()->with('status', 'error')->with('message', 'Venda não encontrada!');
+            return redirect()->back()->with('status', 'error')->with('message', 'Sale not found');
         }
 
         $sellers = Seller::all();
@@ -84,10 +84,10 @@ class SaleController extends Controller
         $updated = $this->saleServices->update($data, $id);
 
         if ($updated) {
-            return redirect()->back()->with('status', 'success')->with('message', 'Venda atualizada com sucesso!');
+            return redirect()->back()->with('status', 'success')->with('message', 'Sale registered successfully');
         }
 
-        return redirect()->back()->with('status', 'error')->with('message', 'Erro ao atualizar venda!');
+        return redirect()->back()->with('status', 'error')->with('message', 'Error when trying to update sale');
     }
 
     public function destroy(int $id) : RedirectResponse
@@ -95,9 +95,9 @@ class SaleController extends Controller
         $deleted = $this->saleServices->delete($id);
 
         if ($deleted) {
-            return redirect()->back()->with('status', 'success')->with('message', 'Venda excluída com sucesso!');
+            return redirect()->back()->with('status', 'success')->with('message', 'Sale deleted successfully!');
         }
 
-        return redirect()->back()->with('status', 'error')->with('message', 'Erro ao excluir venda!');
+        return redirect()->back()->with('status', 'error')->with('message', 'Error when trying to delete sale');
     }
 }
