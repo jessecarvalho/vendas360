@@ -13,17 +13,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Rename .env.production to .env
-        run: mv .env.production .env
-
-      - name: Set Environment Variables in .env
-        run: |
-          echo "MAIL_HOST=${{ secrets.MAIL_HOST }}" >> .env
-          echo "MAIL_USERNAME=${{ secrets.MAIL_USERNAME }}" >> .env
-          echo "MAIL_PASSWORD=${{ secrets.MAIL_PASSWORD }}" >> .env
-          echo "MAIL_FROM_ADDRESS=${{ secrets.MAIL_FROM_ADDRESS }}" >> .env
-          echo "MAIL_FROM_NAME=${{ secrets.MAIL_FROM_NAME }}" >> .env
-
       - name: Log in to Docker Hub
         uses: docker/login-action@v1
         with:
