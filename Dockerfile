@@ -25,16 +25,12 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Configuração do driver de log
 RUN mkdir -p /etc/docker && echo '{ "log-driver": "json-file" }' > /etc/docker/daemon.json
 
-# Copia o script de entrada
-COPY docker-entrypoint.sh /usr/local/bin/
-
-# Garante que o script de entrada seja executável
-RUN chmod +x /usr/local/bin/docker-entrypoint.sh
-
 WORKDIR /var/www/html
 
 # Copia o código da aplicação
 COPY . .
+
+RUN mv .env.production .env
 
 # Instalação das dependências PHP
 RUN composer install --no-interaction
@@ -48,7 +44,7 @@ RUN npm run build
 # Geração da chave de aplicação Laravel
 RUN php artisan key:generate
 
-# Define o script de entrada como ponto de entrada do contêiner
-ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
-
 EXPOSE 8000
+
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+
