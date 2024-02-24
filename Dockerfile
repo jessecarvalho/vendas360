@@ -22,6 +22,10 @@ RUN curl -sL https://deb.nodesource.com/setup_21.x | bash - && \
 # Instalação do Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+COPY docker-entrypoint.sh /usr/local/bin/
+
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
 # Configuração do driver de log
 RUN mkdir -p /etc/docker && echo '{ "log-driver": "json-file" }' > /etc/docker/daemon.json
 
@@ -46,5 +50,4 @@ RUN php artisan key:generate
 
 EXPOSE 8000
 
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
-
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
