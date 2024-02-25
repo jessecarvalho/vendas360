@@ -16,7 +16,7 @@ This is a web system developed to register sellers and sales, as well as calcula
 ## How to run the tests
 1. Configure the `.env.testing` file with your test database information.
 2. With docker running, execute the command `docker-compose exec app php artisan migrate --env=testing` to create the test database.
-3. Execute the command `docker-compose run app php artisan test` to run the tests.
+3. Execute the command `docker-compose exec app php artisan test` to run the tests.
 
 ## Cronjob
 The system is set up to send emails daily at 23:59 to the administrator and to the sellers. The trigger is being set up directly in the creation of the docker image.
